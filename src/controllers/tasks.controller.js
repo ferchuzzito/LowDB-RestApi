@@ -31,8 +31,25 @@ export const getTask = (req, res) => {
   res.json(taskFound);
 };
 
-export const updateTask = (req, res) => {
-  res.send("sending tasks");
+export const updateTask = async (req, res) => {
+  const { name, description } = req.body;
+
+  try {
+    const db = getConnection();
+    const taskFound = db.data.tasks.find((t) => t.id === req.params.id);
+    if (!taskFound) return res.sendStatus(404);
+
+    taskFound.name = name;
+    taskFound.description = description;
+
+    db.data.tasks.map((t) => (t.id === req.params.id ? taskFound : t));
+
+    await db.write();
+
+    res.json(taskFound);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 };
 export const deleteTask = async (req, res) => {
   const db = getConnection();
