@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
   count,
-  createTasks,
-  deleteTasks,
+  createTask,
+  deleteTask,
   getTask,
   getTasks,
-  updateTasks,
+  updateTask,
 } from "../controllers/tasks.controller.js";
 
 const router = Router();
@@ -13,8 +13,8 @@ const router = Router();
 router.get("/tasks", getTasks);
 router.get("/tasks/count", count);
 router.get("/tasks/:id", getTask);
-router.post("/tasks", createTasks);
-router.put("/tasks/:id", updateTasks);
-router.delete("/tasks/:id", deleteTasks);
+router.post("/tasks", createTask);
+router.put("/tasks/:id", updateTask);
+router.delete("/tasks/:id", deleteTask);
 
 export default router;
