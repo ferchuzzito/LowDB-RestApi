@@ -1,10 +1,6 @@
-import express from "express";
-import taskRoutes from "./routes/tasks.routes.js";
-import "./database/database.js"
+import {createConnection} from "./database/database.js"
+import app from "./app.js"
 
-const app = express();
-
-app.use(taskRoutes)
-
+createConnection();
 app.listen(3000);
 console.log('Server running on port 3000')
